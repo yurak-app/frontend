@@ -56,4 +56,3 @@ Loyihaga `vercel.json` fayli qo'shilgan:
 }
 ```
 Bu React Router yo'llari (`/traffic`, `/devices`, `/profile`, `/login`) sahifani yangilaganda (Refresh/F5) 404 xatosi bermasdan to'g'ri ishlashini ta'minlaydi.
-
