@@ -3,91 +3,69 @@ import { HeroSection } from "./components/HeroSection";
 import { FeaturesSection } from "./components/FeaturesSection";
 import { PlatformsSection } from "./components/PlatformsSection";
 import { Link } from "react-router-dom";
-import { Code, Database, Server, Shield } from "lucide-react";
+import { Download, EyeOff, Lock, ShieldCheck } from "lucide-react";
 
 export function LandingPage() {
-  usePageTitle("Yurak — Faollik va Tarmoq Telemetriyasi");
+  usePageTitle(
+    "Yurak — Faollik va Tarmoq Telemetriyasi",
+    "Android, Windows va veb-brauzerlar uchun markazlashgan telemetriya platformasi. Operatsion tizim darajasidagi 1:1 aniq ekran vaqti, ilovalar faolligi va tarmoq trafigi hisoboti."
+  );
 
   return (
     <div className="w-full flex flex-col">
       {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* 2. Technical Features */}
+      {/* 2. Features Section */}
       <FeaturesSection />
 
       {/* 3. Platform Agents */}
       <PlatformsSection />
 
-      {/* 4. Architecture & Security Section */}
-      <section className="py-20 bg-surface border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bg border border-border text-xs font-mono text-muted">
-                Tizim Arxitekturasi
+      {/* 4. Security & Privacy Guarantee (User-Centric) */}
+      <section id="security" className="py-20 bg-surface border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bg border border-border text-xs font-mono text-muted">
+              Xavfsizlik va Maxfiylik
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+              Sizning shaxsiy ma'lumotlaringiz 100% daxlsiz
+            </h2>
+            <p className="text-muted text-base leading-relaxed">
+              Yurak platformasi sizning qimmatli vaqtingiz va internetingiz qayerga ketayotganini ko'rsatish uchun yaratilgan. Biz hech qachon shaxsiy hayotingizga aralashmaymiz.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-7 rounded-2xl bg-bg border border-border space-y-4 hover:border-accent/40 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                <Lock size={24} />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
-                Xavfsiz, ochiq va kengaytiriluvchi telemetriya protokoli
-              </h2>
-              <p className="text-sm sm:text-base text-muted leading-relaxed">
-                Yurak mijozi (agent) va markaziy backend o'rtasidagi ma'lumot almashinuvi shifrlangan HTTPS protokoli orqali amalga oshiriladi. Har bir qurilma o'zining unikal API tokeniga ega.
+              <h3 className="font-bold text-lg text-ink">Shaxsiy xabarlar o'qilmaydi</h3>
+              <p className="text-sm text-muted leading-relaxed">
+                Ilovalar ichidagi yozishmalar, fotosuratlar, parollar, SMS xabarlar yoki audio/video yozuvlar hech qachon o'qilmaydi va serverga yuborilmaydi.
               </p>
-              
-              <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-bg border border-border">
-                  <Server size={18} className="text-accent mt-0.5 shrink-0" />
-                  <div className="text-xs">
-                    <span className="font-semibold text-ink block">REST Ingestion API</span>
-                    <span className="text-muted">Hodisalar 50 tadan paketlarda idempotent tarzda qabul qilinadi.</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-bg border border-border">
-                  <Database size={18} className="text-sky-500 mt-0.5 shrink-0" />
-                  <div className="text-xs">
-                    <span className="font-semibold text-ink block">PostgreSQL & Prisma Rollups</span>
-                    <span className="text-muted">Kunlik va haftalik jadvallar avtomatik birlashtirilib tezkor hisoblanadi.</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-bg border border-border">
-                  <Shield size={18} className="text-emerald-500 mt-0.5 shrink-0" />
-                  <div className="text-xs">
-                    <span className="font-semibold text-ink block">Shaxsiy Ma'lumotlar Daxlsizligi</span>
-                    <span className="text-muted">Faqat vaqt va tarmoq drayveri hisoblari saqlanadi, shaxsiy kontent olinmaydi.</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* Code / Protocol snippet visual */}
-            <div className="rounded-2xl border border-border bg-ink text-surface p-6 font-mono text-xs overflow-x-auto shadow-xl">
-              <div className="flex items-center justify-between border-b border-surface/20 pb-3 mb-4 text-surface/60">
-                <span className="flex items-center gap-2"><Code size={14} /> Telemetriya JSON Namuna</span>
-                <span>POST /api/v1/events</span>
+            <div className="p-7 rounded-2xl bg-bg border border-border space-y-4 hover:border-accent/40 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center">
+                <EyeOff size={24} />
               </div>
-              <pre className="text-emerald-400 leading-relaxed">
-{`{
-  "events": [
-    {
-      "eventType": "app_usage",
-      "appIdentifier": "org.telegram.messenger",
-      "appDisplayName": "Telegram",
-      "startedAt": "2026-11-09T08:00:00.000Z",
-      "endedAt": "2026-11-09T08:28:30.000Z",
-      "durationSeconds": 1710,
-      "cellularBytes": 4073324544,
-      "wifiBytes": 0,
-      "sessionStart": true
-    }
-  ]
-}`}
-              </pre>
-              <div className="mt-4 pt-3 border-t border-surface/20 flex items-center justify-between text-[11px] text-surface/60">
-                <span>Dedup key: [deviceId, appId, eventType, startedAt, endedAt]</span>
-                <span className="text-emerald-300">HTTP 201 Created</span>
+              <h3 className="font-bold text-lg text-ink">Reklama va trekerlardan xoli</h3>
+              <p className="text-sm text-muted leading-relaxed">
+                Tizimda reklama tarmoqlari, foydalanuvchi xulq-atvorini kuzatuvchi uchinchi tomon trekerlari umuman mavjud emas. Ma'lumotlar faqat sizga tegishli.
+              </p>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-bg border border-border space-y-4 hover:border-accent/40 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
+                <ShieldCheck size={24} />
               </div>
+              <h3 className="font-bold text-lg text-ink">To'liq ma'lumot nazorati</h3>
+              <p className="text-sm text-muted leading-relaxed">
+                Istalgan paytda barcha to'plangan telemetriya ma'lumotlarini ochiq JSON yoki CSV formatida yuklab olishingiz yoki hisobingizdan butunlay o'chirib tashlashingiz mumkin.
+              </p>
             </div>
           </div>
         </div>
@@ -105,15 +83,16 @@ export function LandingPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               to="/download"
-              className="px-6 py-3 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-accent-hover transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-accent-hover transition-colors shadow-sm"
             >
+              <Download size={16} />
               Ilovalarni yuklab olish
             </Link>
             <Link
               to="/docs"
               className="px-5 py-3 rounded-xl border border-border bg-surface hover:bg-bg text-ink font-semibold text-sm transition-colors"
             >
-              Qo'llanmani o'qish
+              O'rnatish qo'llanmasi
             </Link>
           </div>
         </div>

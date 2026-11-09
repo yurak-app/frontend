@@ -37,7 +37,13 @@ export function ScreenTimePage() {
       ]);
       return { daily, devices: devicesRes.devices };
     },
-    [token, selectedDay, selectedDeviceId]
+    [token, selectedDay, selectedDeviceId],
+    {
+      enabled: !!token,
+      showLoadingOnReload: false,
+      fallbackErrorMessage: "Ekran vaqti ma'lumotlarini yuklab bo'lmadi.",
+      cacheKey: `screen-time:${selectedDay}:${selectedDeviceId || "all"}`,
+    }
   );
 
   const daily = data?.daily ?? null;

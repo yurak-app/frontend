@@ -1,0 +1,27 @@
+# Yurak Telemetriya & Nazorat Platformasi
+# https://yurak.ismaaiiyl.me
+
+User-agent: *
+Allow: /
+Allow: /download
+Allow: /docs
+Allow: /about
+Allow: /privacy
+Allow: /terms
+
+# Disallow authenticated application pages and auth forms
+Disallow: /dashboard
+Disallow: /screen-time
+Disallow: /app-usage
+Disallow: /data-usage
+Disallow: /devices
+Disallow: /history
+Disallow: /reports
+Disallow: /settings
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+
+# XML Sitemap for search engines
+Sitemap: https://yurak.ismaaiiyl.me/sitemap.xml
+

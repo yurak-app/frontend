@@ -1,73 +1,118 @@
 import { Activity, Clock, Cpu, Database, ShieldCheck, Wifi } from "lucide-react";
+import { FeatureCard, type FeatureData } from "./FeatureCard";
 
-const FEATURES = [
+const FEATURES: FeatureData[] = [
   {
     icon: Clock,
+    tag: "OS DARAJASIDA",
+    tagColor: "text-accent bg-accent/10 border-accent/20",
+    iconBg: "bg-accent/10",
+    iconColor: "text-accent",
     title: "1:1 Ekran Vaqti Aniqligi",
     description:
-      "Tizim faqat ekran ochiq va ilova faol (foreground) bo'lgan paytni hisoblaydi. Fon audio yoki yopiq ekran vaqti aralashib ketmaydi.",
+      "Faqat ekran ochiq va ilova faol bo'lgan daqiqalar hisoblanadi. Fon audio yoki yopiq ekran vaqti aralashmaydi.",
   },
   {
     icon: Wifi,
+    tag: "TARMOQ DRAYVERI",
+    tagColor: "text-sky-500 bg-sky-500/10 border-sky-500/20",
+    iconBg: "bg-sky-500/10",
+    iconColor: "text-sky-500",
     title: "Tarmoq Sarfi Telemetriyasi",
     description:
-      "Mobil internet (SIM-karta), Wi-Fi va boshqa qurilmalarga tarqatilgan Hotspot trafigi alohida baytlar kesimida jamlanadi.",
+      "Mobil internet (SIM), Wi-Fi va Hotspot (tethering) orqali tarqatilgan trafigi alohida baytlar kesimida jamlanadi.",
   },
   {
     icon: Cpu,
+    tag: "YAGONA EKOTIZIM",
+    tagColor: "text-purple-500 bg-purple-500/10 border-purple-500/20",
+    iconBg: "bg-purple-500/10",
+    iconColor: "text-purple-500",
     title: "Kross-Platform Arxitektura",
     description:
-      "Android telefoni, Windows ishchi kompyuteri va brauzer bir hisob ostida birlashib, umumiy kundalik faollikni yagona manbada aks ettiradi.",
+      "Android telefoni, Windows kompyuteri va brauzeringiz bitta hisob ostida birlashib, umumiy faollikni ko'rsatadi.",
   },
   {
     icon: Database,
-    title: "Oflayn Buferlash (Zero Data Loss)",
+    tag: "ZERO DATA LOSS",
+    tagColor: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+    iconBg: "bg-emerald-500/10",
+    iconColor: "text-emerald-500",
+    title: "Oflayn Buferlash Tizimi",
     description:
-      "Internet uzilganda hodisalar lokal SQLite bazasida xavfsiz navbatda turadi. Aloqa tiklangach kichik paketlarda serverga to'liq yetkaziladi.",
+      "Internet uzilganda hodisalar lokal SQLite bazasida xavfsiz saqlanadi. Aloqa tiklangach to'liq serverga uzatiladi.",
   },
   {
     icon: Activity,
-    title: "Vaqt Mintaqasi Hisobi (UTC+5)",
+    tag: "TOSHKENT UTC+5",
+    tagColor: "text-amber-500 bg-amber-500/10 border-amber-500/20",
+    iconBg: "bg-amber-500/10",
+    iconColor: "text-amber-500",
+    title: "Vaqt Mintaqasi Hisobi",
     description:
-      "Barcha ma'lumotlar Toshkent vaqti bilan qat'iy 00:00:00 dan 23:59:59 gacha bo'lgan kunlik chegaralarga bog'lanadi.",
+      "Barcha telemetriya Toshkent vaqti bilan qat'iy 00:00:00 dan 23:59:59 gacha bo'lgan kunlik chegaralarga bog'lanadi.",
   },
   {
     icon: ShieldCheck,
+    tag: "100% DAXLSIZLIK",
+    tagColor: "text-rose-500 bg-rose-500/10 border-rose-500/20",
+    iconBg: "bg-rose-500/10",
+    iconColor: "text-rose-500",
     title: "Formal Maxfiylik Kafolati",
     description:
-      "Klaviatura matnlari, parollar, xabarlar, kamera yoki shaxsiy fayllar kuzatilmaydi. Faqat ochiq OS darajasidagi vaqt va bayt ko'rsatkichlari saqlanadi.",
+      "Klaviatura matnlari, parollar, xabarlar yoki fayllar kuzatilmaydi. Faqat ochiq OS darajasidagi raqamlar saqlanadi.",
   },
 ];
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="py-20 bg-surface border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+    <section id="features" className="py-20 bg-surface border-b border-border overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bg border border-border text-xs font-mono text-muted">
             Texnik Xususiyatlar
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
             Aniq, barqaror va ortiqcha shovqinsiz telemetriya
           </h2>
-          <p className="text-muted text-base leading-relaxed">
-            Yurak murakkab hisob-kitoblarni operatsion tizimning rasmiy API vositalari orqali xolis, xatosiz va toza amalga oshiradi.
+          <p className="text-muted text-xs sm:text-base leading-relaxed">
+            Yurak murakkab hisob-kitoblarni operatsion tizimning rasmiy API vositalari orqali xolis va xatosiz amalga oshiradi.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 1. Desktop Grid (md and up) */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {FEATURES.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-2xl bg-bg border border-border hover:border-accent/40 transition-all space-y-3"
-            >
-              <div className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center text-accent shadow-xs">
-                <item.icon size={20} />
-              </div>
-              <h3 className="font-bold text-base text-ink">{item.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{item.description}</p>
-            </div>
+            <FeatureCard key={idx} item={item} />
           ))}
+        </div>
+
+        {/* 2. Mobile Continuous Looping Auto-Scroll Carousel */}
+        <div className="block md:hidden -mx-4 overflow-hidden relative">
+          <div className="flex w-max gap-4 px-4 animate-loop-scroll">
+            {/* First set of features */}
+            {FEATURES.map((item, idx) => (
+              <FeatureCard
+                key={`f1-${idx}`}
+                item={item}
+                className="w-[78vw] max-w-[280px] shrink-0"
+              />
+            ))}
+            {/* Duplicated set for seamless, glitch-free continuous loop */}
+            {FEATURES.map((item, idx) => (
+              <FeatureCard
+                key={`f2-${idx}`}
+                item={item}
+                className="w-[78vw] max-w-[280px] shrink-0"
+              />
+            ))}
+          </div>
+
+          <p className="text-center text-[11px] text-muted pt-3 flex items-center justify-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+            <span>O'qish uchun bosing yoki teging (avtomatik aylanadi)</span>
+          </p>
         </div>
       </div>
     </section>

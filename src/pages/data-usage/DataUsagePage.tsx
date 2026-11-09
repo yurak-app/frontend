@@ -44,7 +44,13 @@ export function DataUsagePage() {
       ]);
       return { daily, devices: devicesRes.devices };
     },
-    [token, selectedDay, selectedDeviceId]
+    [token, selectedDay, selectedDeviceId],
+    {
+      enabled: !!token,
+      showLoadingOnReload: false,
+      fallbackErrorMessage: "Tarmoq trafigi ma'lumotlarini yuklab bo'lmadi.",
+      cacheKey: `data-usage:${selectedDay}:${selectedDeviceId || "all"}`,
+    }
   );
 
   const daily = data?.daily ?? null;

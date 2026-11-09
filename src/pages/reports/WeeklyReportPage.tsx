@@ -23,7 +23,12 @@ export function WeeklyReportPage() {
   const { data: report, loading, error } = useAsyncData<WeeklyReport>(
     () => getWeeklyReport(token!, selectedStart),
     [token, selectedStart],
-    { enabled: !!token, fallbackErrorMessage: "Haftalik hisobotni yuklab bo'lmadi.", cacheKey: `weekly-report:${selectedStart}` }
+    {
+      enabled: !!token,
+      showLoadingOnReload: false,
+      fallbackErrorMessage: "Haftalik hisobotni yuklab bo'lmadi.",
+      cacheKey: `weekly-report:${selectedStart}`,
+    }
   );
 
   const weekPills = useMemo(() => {

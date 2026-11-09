@@ -90,7 +90,12 @@ export function DashboardPage() {
       return { daily, todaySeconds, range, devices: devicesRes.devices, goals: goalsRes.goals };
     },
     [token, selectedDay, selectedDeviceId],
-    { enabled: !!token, showLoadingOnReload: false, fallbackErrorMessage: "Couldn't load dashboard.", cacheKey: "dashboard" }
+    {
+      enabled: !!token,
+      showLoadingOnReload: false,
+      fallbackErrorMessage: "Dashboard ma'lumotlarini yuklab bo'lmadi.",
+      cacheKey: `dashboard:${selectedDay}:${selectedDeviceId || "all"}`,
+    }
   );
 
   const daily = data?.daily ?? null;

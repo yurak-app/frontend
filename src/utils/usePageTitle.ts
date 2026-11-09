@@ -1,12 +1,34 @@
 import { useEffect } from "react";
 
-/** Sets the browser tab title for the lifetime of the calling page. */
-export function usePageTitle(title: string) {
+/**
+ * Sets the document title and dynamically updates the meta description
+ * for search engine crawlers and browser tabs.
+ */
+export function usePageTitle(title: string, description?: string) {
   useEffect(() => {
-    const previous = document.title;
-    document.title = `Yurak — ${title}`;
+    const previousTitle = document.title;
+    document.title = title.startsWith("Yurak") ? title : `Yurak — ${title}`;
+
+    let previousDesc: string | null = null;
+    let descEl = document.querySelector('meta[name="description"]');
+
+    if (description) {
+      if (descEl) {
+        previousDesc = descEl.getAttribute("content");
+        descEl.setAttribute("content", description);
+      } else {
+        descEl = document.createElement("meta");
+        descEl.setAttribute("name", "description");
+        descEl.setAttribute("content", description);
+        document.head.appendChild(descEl);
+      }
+    }
+
     return () => {
-      document.title = previous;
+      document.title = previousTitle;
+      if (description && descEl && previousDesc !== null) {
+        descEl.setAttribute("content", previousDesc);
+      }
     };
-  }, [title]);
+  }, [title, description]);
 }

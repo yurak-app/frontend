@@ -170,6 +170,50 @@ body {
   background-size: 200% 100%;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes loop-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-loop-scroll {
+  animation: loop-scroll 28s linear infinite;
+}
+
+.animate-loop-scroll:hover,
+.animate-loop-scroll:active {
+  animation-play-state: paused;
+}
+
+@keyframes loop-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-loop-scroll-reverse {
+  animation: loop-scroll-reverse 28s linear infinite;
+}
+
+.animate-loop-scroll-reverse:hover,
+.animate-loop-scroll-reverse:active {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     animation: none;

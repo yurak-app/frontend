@@ -9,6 +9,7 @@ import { AuthLayout } from "./layouts/AuthLayout";
 import { LandingPage } from "./pages/landing/LandingPage";
 import { DownloadPage } from "./pages/download/DownloadPage";
 import { DocsPage } from "./pages/docs/DocsPage";
+import { AboutPage } from "./pages/about/AboutPage";
 import { PrivacyPage } from "./pages/privacy/PrivacyPage";
 import { TermsPage } from "./pages/terms/TermsPage";
 
@@ -29,11 +30,12 @@ import { SettingsPage } from "./pages/settings/SettingsPage";
 export function App() {
   return (
     <Routes>
-      {/* 1. Public Pages (Landing, Download, Docs, Privacy, Terms) */}
+      {/* 1. Public Pages (Landing, Download, Docs, About, Privacy, Terms) */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/docs" element={<DocsPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
       </Route>

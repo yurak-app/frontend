@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Download, Laptop, Radio, Smartphone, Timer } from "lucide-react";
-import { GithubIcon } from "../../../components/ui/GithubIcon";
 
 export function HeroSection() {
   return (
@@ -58,15 +57,12 @@ export function HeroSection() {
                 Hisob ochish
                 <ArrowRight size={16} />
               </Link>
-              <a
-                href="https://github.com/ismaaiiyl/yurak"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                to="/docs"
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-muted hover:text-ink hover:bg-surface border border-transparent hover:border-border text-sm font-medium transition-all"
               >
-                <GithubIcon size={18} />
-                GitHub
-              </a>
+                Qo'llanma
+              </Link>
             </div>
           </div>
 
@@ -130,11 +126,11 @@ export function HeroSection() {
                   <div className="flex items-center justify-between p-2 rounded-lg bg-bg border border-border">
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-sky-500"></span>
-                      <span className="font-medium text-ink">Yurak Agent</span>
+                      <span className="font-medium text-ink">PUBG</span>
                     </div>
                     <div className="flex items-center gap-3 font-mono text-muted">
                       <span>1s 36d</span>
-                      <span>5.8 MB</span>
+                      <span>583 MB</span>
                     </div>
                   </div>
 
@@ -145,7 +141,7 @@ export function HeroSection() {
                     </div>
                     <div className="flex items-center gap-3 font-mono text-muted">
                       <span>28 daqiqa</span>
-                      <span>3.88 GB</span>
+                      <span>388 MB</span>
                     </div>
                   </div>
                 </div>

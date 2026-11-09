@@ -2,7 +2,10 @@ import { usePageTitle } from "../../utils/usePageTitle";
 import { Lock, Shield, ShieldAlert, ShieldCheck } from "lucide-react";
 
 export function PrivacyPage() {
-  usePageTitle("Maxfiylik Siyosati — Yurak");
+  usePageTitle(
+    "Maxfiylik Siyosati — Yurak",
+    "Yurak platformasida foydalanuvchilarning shaxsiy ma'lumotlari daxlsizligi kafolati va to'planadigan telemetriya ma'lumotlari tartibi."
+  );
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">

@@ -2,7 +2,10 @@ import { usePageTitle } from "../../utils/usePageTitle";
 import { FileText, AlertTriangle, CheckCircle, Scale } from "lucide-react";
 
 export function TermsPage() {
-  usePageTitle("Foydalanish Shartlari — Yurak");
+  usePageTitle(
+    "Foydalanish Shartlari — Yurak",
+    "Yurak xizmatlari, dasturlari va telemetriya monitoringidan foydalanish bo'yicha rasmiy shartlar, qoidalar va javobgarlik chegaralari."
+  );
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">

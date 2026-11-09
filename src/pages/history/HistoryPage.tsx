@@ -33,7 +33,12 @@ export function HistoryPage() {
       return { range, heatmap };
     },
     [token],
-    { enabled: !!token, fallbackErrorMessage: "Tarix ma'lumotlarini yuklab bo'lmadi.", cacheKey: "history" }
+    {
+      enabled: !!token,
+      showLoadingOnReload: false,
+      fallbackErrorMessage: "Tarix ma'lumotlarini yuklab bo'lmadi.",
+      cacheKey: "history",
+    }
   );
 
   const totalsByDate = useMemo(() => new Map((data?.range.daily ?? []).map((d) => [d.date, d.totalSeconds])), [data]);

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Shield, Terminal } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "./ui/GithubIcon";
 
 export function PublicFooter() {
@@ -7,104 +7,71 @@ export function PublicFooter() {
 
   return (
     <footer className="w-full border-t border-border bg-surface text-ink mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-          {/* Brand Col */}
-          <div className="space-y-3 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 no-underline">
-              <img src="/logo.png" alt="Yurak" className="w-7 h-7 rounded-lg shrink-0 object-cover" />
-              <span className="font-bold text-lg text-ink">Yurak</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        {/* Main Content Grid: 5 columns on desktop, 2 columns on mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-10 border-b border-border">
+          {/* Brand info (spans 2 columns on desktop) */}
+          <div className="col-span-2 space-y-3">
+            <Link to="/" className="inline-flex items-center gap-2.5 no-underline">
+              <img
+                src="/logo.png"
+                alt="Yurak"
+                className="w-8 h-8 rounded-lg shrink-0 object-cover"
+              />
+              <div className="flex flex-col">
+                <span className="font-bold text-lg text-ink leading-tight">Yurak</span>
+                <span className="text-[10px] text-muted font-mono tracking-wider uppercase">
+                  Telemetriya & Nazorat
+                </span>
+              </div>
+              <span className="ml-1 text-[10px] font-mono px-2 py-0.5 rounded-md bg-good/10 text-good border border-good/20">
+                v1.0
+              </span>
             </Link>
-            <p className="text-sm text-muted leading-relaxed">
-              Kross-platform faollik va tarmoq telemetriyasi tizimi. Ekran vaqti, ilovalardan foydalanish va tarmoq trafigi hisoboti.
+            <p className="text-xs text-muted leading-relaxed max-w-sm">
+              Android, Windows va veb-brauzerlar uchun markazlashgan telemetriya platformasi.
+              100% ochiq manbali va shaxsiy ma'lumotlar daxlsiz.
             </p>
-            <div className="flex items-center gap-2 text-xs text-muted font-mono">
-              <span className="w-2 h-2 rounded-full bg-good animate-pulse"></span>
-              v1.0.0-beta · Open Source
-            </div>
           </div>
 
-          {/* Nav Links */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted mb-3">Tizim</h4>
-            <ul className="space-y-2 text-sm">
+          {/* Group 1: Platforma */}
+          <div className="space-y-3">
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/80 block">
+              Platforma
+            </span>
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/" className="text-muted hover:text-ink transition-colors">
-                  Bosh sahifa
+                  Asosiy
                 </Link>
               </li>
               <li>
-                <Link to="/download" className="text-muted hover:text-ink transition-colors">
-                  Yuklab olish markazi
+                <a href="/#features" className="text-muted hover:text-ink transition-colors">
+                  Imkoniyatlar
+                </a>
+              </li>
+              <li>
+                <Link to="/download" className="text-muted hover:text-ink transition-colors font-medium">
+                  Yuklab olish
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Group 2: Hujjatlar */}
+          <div className="space-y-3">
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/80 block">
+              Hujjatlar
+            </span>
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/docs" className="text-muted hover:text-ink transition-colors">
-                  Texnik hujjatlar (Docs)
+                  O'rnatish qo'llanmasi
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-muted hover:text-ink transition-colors">
-                  Boshqaruv paneli (Dashboard)
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Repositories */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted mb-3">Repozitoriylar</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a
-                  href="https://github.com/yurak-app/android"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-muted hover:text-ink transition-colors"
-                >
-                  <GithubIcon size={14} /> Android Client
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/yurak-app/windows"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-muted hover:text-ink transition-colors"
-                >
-                  <Terminal size={14} /> Windows Agent (.exe)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/yurak-app/extension"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-muted hover:text-ink transition-colors"
-                >
-                  <GithubIcon size={14} /> Chrome Extension
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/ismaaiiyl/yurak"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-muted hover:text-ink transition-colors"
-                >
-                  <GithubIcon size={14} /> Core / Backend & Web
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal & Security */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted mb-3">Maxfiylik va Huquqiy</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/privacy" className="inline-flex items-center gap-1.5 text-muted hover:text-ink transition-colors">
-                  <Shield size={14} /> Maxfiylik siyosati
+                <Link to="/privacy" className="text-muted hover:text-ink transition-colors">
+                  Maxfiylik siyosati
                 </Link>
               </li>
               <li>
@@ -112,18 +79,46 @@ export function PublicFooter() {
                   Foydalanish shartlari
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Group 3: Loyiha */}
+          <div className="space-y-3 col-span-2 sm:col-span-1">
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-ink/80 block">
+              Loyiha
+            </span>
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <span className="text-xs text-muted block mt-2">
-                  100% shaxsiy va xavfsiz. Ma'lumotlar faqat foydalanuvchiga tegishli.
-                </span>
+                <Link to="/about" className="text-muted hover:text-ink transition-colors">
+                  Loyiha haqida
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/yurak-app"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-accent hover:underline font-medium"
+                >
+                  <GithubIcon size={14} />
+                  <span>yurak-app tashkiloti</span>
+                  <ExternalLink size={11} />
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
-          <p>© {currentYear} Yurak Platformasi. Barcha huquqlar himoyalangan.</p>
-          <p className="font-mono">Toshkent vaqti (UTC+5) bo'yicha hisob-kitob qilinadi.</p>
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
+          <div>
+            © {currentYear} Yurak. Barcha huquqlar himoyalangan.
+          </div>
+          <div className="flex items-center gap-2 text-muted text-[11px] sm:text-xs">
+            <span>Ochiq manbali telemetriya</span>
+            <span>·</span>
+            <span>Toshkent, UTC+5</span>
+          </div>
         </div>
       </div>
     </footer>
