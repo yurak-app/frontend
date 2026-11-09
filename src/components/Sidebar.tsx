@@ -1,6 +1,17 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { AppWindow, CalendarDays, CalendarRange, LayoutDashboard, Laptop, type LucideIcon, Radio, UserCircle } from "lucide-react";
+import {
+  AppWindow,
+  CalendarDays,
+  CalendarRange,
+  Clock,
+  Laptop,
+  LayoutDashboard,
+  Radio,
+  Settings,
+  type LucideIcon,
+  UserCircle,
+} from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
 interface NavItem {
@@ -11,27 +22,24 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: "/", end: true, icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/traffic", icon: Radio, label: "Data & Traffic" },
-  { to: "/devices", icon: Laptop, label: "Devices" },
-  { to: "/report", icon: CalendarRange, label: "Weekly report" },
-  { to: "/history", icon: CalendarDays, label: "History" },
-  { to: "/apps", icon: AppWindow, label: "Apps & goals" },
+  { to: "/dashboard", end: true, icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/screen-time", icon: Clock, label: "Ekran vaqti" },
+  { to: "/app-usage", icon: AppWindow, label: "Ilovalar tahlili" },
+  { to: "/data-usage", icon: Radio, label: "Tarmoq trafigi" },
+  { to: "/devices", icon: Laptop, label: "Qurilmalar" },
+  { to: "/history", icon: CalendarDays, label: "Tarix" },
+  { to: "/reports", icon: CalendarRange, label: "Haftalik hisobot" },
 ];
 
 const accountLinkClass = ({ isActive }: { isActive: boolean }) =>
   `flex items-center gap-2 min-w-0 no-underline text-[0.83rem] px-2.5 py-2.5 rounded-full transition-colors ${
-    isActive ? "bg-bg text-accent" : "text-ink hover:bg-bg"
+    isActive ? "bg-bg text-accent font-semibold" : "text-ink hover:bg-bg"
   }`;
 
 export function Sidebar() {
   const { user } = useAuth();
   const location = useLocation();
 
-  // A sliding pill behind whichever nav item is active — the same
-  // measure-and-animate approach as SegmentedControl's thumb, adapted to a
-  // vertical list: real position/height read off the DOM rather than assumed,
-  // so it stays correct regardless of font metrics or a label wrapping.
   const listRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef(new Map<string, HTMLAnchorElement>());
   const [thumb, setThumb] = useState<{ top: number; height: number } | null>(null);
@@ -57,17 +65,19 @@ export function Sidebar() {
   useLayoutEffect(() => {
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <nav
-      className="w-[220px] shrink-0 h-screen sticky top-0 overflow-y-auto bg-surface border-r border-border flex flex-col p-3.5 py-5"
+      className="w-[230px] shrink-0 h-screen sticky top-0 overflow-y-auto bg-surface border-r border-border flex flex-col p-3.5 py-5"
       aria-label="Main"
     >
-      <NavLink to="/" className="flex items-center gap-2.5 font-bold text-[1.05rem] text-ink no-underline px-2.5 py-1.5 mb-5">
-        <img src="/logo.png" alt="" className="w-7 h-7 rounded-lg shrink-0" />
-        Yurak
+      <NavLink to="/dashboard" className="flex items-center gap-2.5 font-bold text-[1.05rem] text-ink no-underline px-2.5 py-1.5 mb-5">
+        <img src="/logo.png" alt="Yurak" className="w-7 h-7 rounded-lg shrink-0 object-cover" />
+        <div className="flex flex-col">
+          <span className="leading-tight">Yurak</span>
+          <span className="text-[10px] text-muted font-normal tracking-wide">Monitoring</span>
+        </div>
       </NavLink>
 
       <div className="relative flex flex-col gap-0.5" ref={listRef}>
@@ -92,7 +102,7 @@ export function Sidebar() {
             }}
             className={({ isActive }) =>
               `relative z-10 flex items-center gap-2.5 px-3.5 py-2.5 rounded-full text-[0.87rem] font-medium transition-colors ${
-                isActive ? "text-accent" : "text-muted hover:text-ink"
+                isActive ? "text-accent font-semibold" : "text-muted hover:text-ink"
               }`
             }
           >
@@ -103,12 +113,20 @@ export function Sidebar() {
 
       <div className="flex-1" />
 
-      <div className="pt-3.5 border-t border-border">
-        <NavLink to="/profile" className={accountLinkClass}>
+      <div className="pt-3.5 border-t border-border flex flex-col gap-1">
+        <NavLink to="/settings" className={accountLinkClass}>
           {({ isActive }) => (
             <>
-              <UserCircle size={22} className={`shrink-0 ${isActive ? "text-accent" : "text-muted"}`} />
-              <span className="truncate">{user?.name || user?.email}</span>
+              <Settings size={18} className={`shrink-0 ${isActive ? "text-accent" : "text-muted"}`} />
+              <span className="truncate">Sozlamalar</span>
+            </>
+          )}
+        </NavLink>
+        <NavLink to="/settings" className={accountLinkClass}>
+          {({ isActive }) => (
+            <>
+              <UserCircle size={20} className={`shrink-0 ${isActive ? "text-accent" : "text-muted"}`} />
+              <span className="truncate text-xs font-mono">{user?.name || user?.email}</span>
             </>
           )}
         </NavLink>
