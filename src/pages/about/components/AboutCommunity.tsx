@@ -17,15 +17,18 @@ export function AboutCommunity() {
         </p>
       </div>
 
-      <div className="pt-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <span className="text-xs text-muted flex items-center gap-1.5">
+          <GithubIcon size={13} className="text-muted" />
+          <span>MIT Ochiq Litsenziyasi</span>
+        </span>
         <a
           href="https://github.com/yurak-app"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-bg border border-border text-ink hover:border-accent hover:text-accent font-semibold text-xs transition-all shadow-xs"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-bg border border-border text-ink hover:border-accent hover:text-accent font-semibold text-xs transition-all shadow-xs"
         >
-          <GithubIcon size={15} />
-          <span>github.com/yurak-app tashkiloti</span>
+          <span>yurak-app tashkiloti</span>
           <ExternalLink size={12} />
         </a>
       </div>

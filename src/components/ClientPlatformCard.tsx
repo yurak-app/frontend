@@ -1,4 +1,5 @@
-import { BookOpen, Download, Globe, Laptop, Smartphone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { BookOpen, Check, Download, Globe, Laptop, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export type PlatformKind = "android" | "windows" | "extension";
@@ -29,14 +30,15 @@ const PLATFORMS: Record<PlatformKind, PlatformConfig> = {
     tag: "Mobil Ilova",
     tagColor: "text-accent",
     title: "Yurak Android",
-    version: "v1.0.0 · APK Fayl",
+    version: "v1.0.0 · Rasmiy APK",
     desc: "Android 9.0+ uchun moslashtirilgan. Operatsion tizimning rasmiy drayverlari orqali har bir ilova vaqti va sarflangan internet hajmini o'lchaydi.",
     specs: [
       { label: "Talab", val: "Android 9.0+ (API 28+)" },
-      { label: "Hajmi", val: "~12 MB" },
-      { label: "Arxitektura", val: "arm64-v8a, armeabi-v7a" },
+      { label: "Hajmi", val: "42.3 MB" },
+      { label: "Arxitektura", val: "Universal (arm64, armeabi, x86_64)" },
     ],
-    downloadUrl: "https://github.com/yurak-app/android/releases/latest",
+    // Direct GitHub Release APK asset link — downloads file directly without opening GitHub pages
+    downloadUrl: "https://github.com/yurak-app/android/releases/download/v1.0.0/yurak-android-v1.0.0.apk",
     downloadLabel: "Android APK Yuklab Olish",
     buttonColor: "bg-accent text-white hover:bg-accent-hover shadow-sm",
     guideUrl: "/docs#android",
@@ -92,6 +94,43 @@ export function ClientPlatformCard({
   const cfg = PLATFORMS[kind];
   const Icon = cfg.icon;
 
+  const [downloadUrl, setDownloadUrl] = useState<string>(cfg.downloadUrl || "");
+  const [versionText, setVersionText] = useState<string>(cfg.version);
+  const [specs, setSpecs] = useState(cfg.specs);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  // Auto-fetch latest release info from GitHub API on mount so newer APKs are instantly available
+  useEffect(() => {
+    if (kind !== "android") return;
+
+    fetch("https://api.github.com/repos/yurak-app/android/releases/latest")
+      .then((res) => {
+        if (!res.ok) throw new Error("Not ok");
+        return res.json();
+      })
+      .then((data) => {
+        const apk = data.assets?.find((a: any) => typeof a.name === "string" && a.name.endsWith(".apk"));
+        if (apk?.browser_download_url) {
+          setDownloadUrl(apk.browser_download_url);
+          setVersionText(`${data.tag_name || "v1.0.0"} · Rasmiy APK`);
+          if (apk.size) {
+            const sizeMb = (apk.size / (1024 * 1024)).toFixed(1);
+            setSpecs((prev) =>
+              prev.map((s) => (s.label === "Hajmi" ? { ...s, val: `${sizeMb} MB` } : s))
+            );
+          }
+        }
+      })
+      .catch(() => {
+        // Fallback to static direct asset link
+      });
+  }, [kind]);
+
+  const handleDownloadClick = () => {
+    setIsDownloading(true);
+    setTimeout(() => setIsDownloading(false), 3000);
+  };
+
   return (
     <div
       className={`rounded-2xl border border-border bg-surface p-5 sm:p-7 flex flex-col justify-between space-y-5 shadow-xs hover:shadow-lg transition-all select-none ${className}`}
@@ -108,13 +147,13 @@ export function ClientPlatformCard({
             {cfg.tag}
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-ink">{cfg.title}</h3>
-          <span className="text-[11px] text-muted font-mono">{cfg.version}</span>
+          <span className="text-[11px] text-muted font-mono">{versionText}</span>
         </div>
 
         <p className="text-xs sm:text-sm text-muted leading-relaxed">{cfg.desc}</p>
 
         <div className="pt-2 border-t border-border space-y-1.5 text-xs text-muted">
-          {cfg.specs.map((s, i) => (
+          {specs.map((s, i) => (
             <div key={i}>
               <strong className="text-ink/80">{s.label}:</strong> {s.val}
             </div>
@@ -129,13 +168,22 @@ export function ClientPlatformCard({
           </div>
         ) : (
           <a
-            href={cfg.downloadUrl}
-            target="_blank"
-            rel="noreferrer"
+            href={downloadUrl}
+            download="yurak-android.apk"
+            onClick={handleDownloadClick}
             className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-colors ${cfg.buttonColor}`}
           >
-            <Download size={15} />
-            {cfg.downloadLabel}
+            {isDownloading ? (
+              <>
+                <Check size={15} className="text-white" />
+                <span>Yuklab olinmoqda...</span>
+              </>
+            ) : (
+              <>
+                <Download size={15} />
+                <span>{cfg.downloadLabel}</span>
+              </>
+            )}
           </a>
         )}
 
@@ -149,4 +197,3 @@ export function ClientPlatformCard({
     </div>
   );
 }
-
